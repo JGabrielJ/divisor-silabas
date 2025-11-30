@@ -1,7 +1,6 @@
-import asyncio
 from .forms import WordForm
 from django.conf import settings
-from .analyzer import WordAnalyzer
+from .core.analyzer import WordAnalyzer
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 # from .forms import FeedbackForm
@@ -32,7 +31,7 @@ async def get_word_analysis_data(word: str) -> dict:
         'con_clusters': a.consonant_clusters(),
     }
 
-def main_view(request):
+async def main_view(request):
     word_form = WordForm()
     # feedback_form = FeedbackForm()
 
@@ -54,7 +53,7 @@ def main_view(request):
             word_form = WordForm(request.POST)
             if word_form.is_valid():
                 try:
-                    analysis_result = asyncio.run(get_word_analysis_data(word_form.cleaned_data['word']))
+                    analysis_result = await get_word_analysis_data(word_form.cleaned_data['word'])
                     request.session['result'] = analysis_result
                 except Exception as e:
                     word_form.add_error('word', ValidationError("Ocorreu um erro ao analisar a palavra. Tente novamente."))

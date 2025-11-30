@@ -1,7 +1,7 @@
 import asyncio
 from django import forms
 from django.conf import settings
-from .analyzer import WordAnalyzer
+from .core.analyzer import WordAnalyzer
 from better_profanity import profanity
 
 

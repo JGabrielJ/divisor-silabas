@@ -31,6 +31,6 @@ Existem duas maneiras de acessar o Divisor de Sílabas, descritas logo abaixo:
 
 - Agora, é só acessar o endereço `127.0.0.1:8000` no seu navegador e você poderá desfrutar do Divisor de Sílabas o quanto quiser.
 - Opcional: Você também pode customizar seu próprio filtro de palavras e suas "palavras secretas" nos arquivos [`rotten.txt`](./eggs-dev/rotten.txt) e [`secrets.json`](./eggs-dev/secrets.json), respectivamente.
-- **_Importante: para que o envio de e-mails funcione corretamente, descomente as referidas linhas nos arquivos [`settings.py (157-162)`](./divisorsilabas_project/settings.py), [`forms.py (58-64)`](./divisor_app/forms.py) e [`views.py (7-8, 37, 41, 48-49, 66-77)`](./divisor_app/views.py)._**
+- **_Importante: para que o envio de e-mails funcione corretamente, descomente as referidas linhas nos arquivos [`settings.py (157-162)`](./divisorsilabas_project/settings.py), [`forms.py (58-64)`](./divisor_app/forms.py) e [`views.py (6-7, 36, 40, 47-48, 65-76)`](./divisor_app/views.py)._**
 
 > Nota do Dev: na versão original do projeto, o PySimpleGUI foi utilizado na criação de uma interface gráfica que atendesse aos requisitos da aplicação. Entretanto, em virtude da biblioteca ter sido descontinuada, decidi reviver o programa transferindo-o para o Django. Esta versão pode ser encontrada em [**ProjetosAcademicos**](https://github.com/JGabrielJ/ProjetosAcademicos/tree/main/DivisorSilabas%20(old)).
