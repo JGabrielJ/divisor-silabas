@@ -31,7 +31,7 @@ async def get_word_analysis_data(word: str) -> dict:
         'con_clusters': a.consonant_clusters(),
     }
 
-async def main_view(request):
+def main_view(request):
     word_form = WordForm()
     # feedback_form = FeedbackForm()
 
@@ -53,7 +53,7 @@ async def main_view(request):
             word_form = WordForm(request.POST)
             if word_form.is_valid():
                 try:
-                    analysis_result = await get_word_analysis_data(word_form.cleaned_data['word'])
+                    import asyncio; analysis_result = asyncio.run(get_word_analysis_data(word_form.cleaned_data['word']))
                     request.session['result'] = analysis_result
                 except Exception as e:
                     word_form.add_error('word', ValidationError("Ocorreu um erro ao analisar a palavra. Tente novamente."))
