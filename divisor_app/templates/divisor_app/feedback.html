@@ -1,0 +1,38 @@
+{% extends "divisor_app/base.html" %}
+
+{% block title %}Feedback | Divisor de Sílabas{% endblock %}
+
+{% block content %}
+    <section class="row justify-content-center" aria-labelledby="feedback-title">
+        <div class="col-12 col-md-10 col-lg-8">
+            <h1 id="feedback-title" class="page-title text-center">Enviar feedback</h1>
+            <p class="page-subtitle text-center">Relate erros, dúvidas ou sugestões.</p>
+
+            {% if messages %}
+                <section class="mb-3" aria-label="Mensagens do sistema">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} text-center">{{ message }}</div>
+                    {% endfor %}
+                </section>
+            {% endif %}
+
+            <div class="panel">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="id_email" class="form-label field-label">Informe seu e-mail:</label>
+                        {{ feedback_form.email }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="id_feedback" class="form-label field-label">Descreva sua situação:</label>
+                        {{ feedback_form.feedback }}
+                    </div>
+
+                    <button type="submit" name="submit_feedback" class="btn btn-secondary w-100">Enviar relatório</button>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

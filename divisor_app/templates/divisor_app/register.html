@@ -1,0 +1,43 @@
+{% extends "divisor_app/base.html" %}
+
+{% block title %}Cadastro | Divisor de Sílabas{% endblock %}
+
+{% block content %}
+    <section class="row justify-content-center" aria-labelledby="register-title">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+            <h1 id="register-title" class="page-title text-center">Criar conta</h1>
+            <p class="page-subtitle text-center">Preencha os dados abaixo.</p>
+
+            <div class="panel">
+                <form method="post" action="{% url 'register-view' %}" novalidate>
+                    {% csrf_token %}
+    
+                    <div class="mb-3">
+                        <label for="name" class="form-label field-label">Nome:</label>
+                        <input id="name" name="name" type="text" class="form-control"
+                            placeholder="Seu nome" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label field-label">E-mail:</label>
+                        <input id="email" name="email" type="email" class="form-control"
+                            placeholder="seu_email@example.com" autocomplete="email" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="pwd" class="form-label field-label">Senha:</label>
+                        <input id="pwd" name="pwd" type="password" class="form-control"
+                            placeholder="Crie uma senha" autocomplete="new-password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Cadastrar-se</button>
+                </form>
+
+                <nav class="d-flex justify-content-between mt-3 small" aria-label="Ações de conta">
+                    <span>Já possui uma conta?</span>
+                    <a href="{% url 'login-view' %}">Fazer login</a>
+                </nav>
+            </div>
+        </div>
+    </section>
+{% endblock %}

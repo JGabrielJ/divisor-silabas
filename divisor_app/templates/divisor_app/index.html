@@ -1,0 +1,74 @@
+{% extends "divisor_app/base.html" %}
+
+{% block title %}Divisor de Sílabas{% endblock %}
+
+{% block content %}
+    <section class="section-gap" aria-labelledby="home-title">
+        <h1 id="home-title" class="page-title text-center">Bem-vindo(a) ao Divisor de Sílabas</h1>
+        <p class="page-subtitle text-center">Analise palavras da língua portuguesa rapidamente.</p>
+    </section>
+
+    {% if messages %}
+        <section class="section-gap" aria-label="Mensagens do sistema">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} text-center">{{ message }}</div>
+            {% endfor %}
+        </section>
+    {% endif %}
+
+    <section class="section-gap panel">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="id_word" class="form-label field-label">Digite uma palavra (no singular):</label>
+                {{ word_form.word }}
+            </div>
+
+            <button type="submit" name="submit_word" class="btn btn-primary w-100">Buscar</button>
+        </form>
+    </section>
+
+    <section class="result-box" aria-live="polite" aria-label="Resultado da análise da palavra">
+        {% if result %}
+            <p class="h5">Divisão Silábica da Palavra "<strong>{{ result.word|upper }}</strong>":</p>
+            <p class="display-6 my-3">{{ result.divided_word }}</p>
+
+            <ul class="pt-2 result-list">
+                {% if result.letters %}<li><strong>{{ result.letters.total }} Letras</strong> → {{ result.letters.vowels }} vogais e {{ result.letters.consonants }} consoantes</li>{% endif %}
+                {% if result.phonemes %}<li><strong>{{ result.phonemes.total }} Fonemas</strong> → {{ result.phonemes.digraphs_total }} dígrafos {{ result.phonemes.digraphs_types }}</li>{% endif %}
+                {% if result.syllables %}<li><strong>{{ result.syllables.total }} Sílabas</strong> → A palavra é <em>{{ result.syllables.classification }}</em></li>{% endif %}
+                {% if result.stress %}<li><strong>Sílaba Tônica "{{ result.stress.syllable }}"</strong> → A palavra é <em>{{ result.stress.classification }}</em></li>{% endif %}
+                {% if result.vow_clusters %}<li><strong>{{ result.vow_clusters.total }} Encontros Vocálicos</strong> → {{ result.vow_clusters.diphthong }} ditongos, {{ result.vow_clusters.triphthong }} tritongos e {{ result.vow_clusters.hiatus }} hiatos</li>{% endif %}
+                {% if result.con_clusters %}<li><strong>{{ result.con_clusters.total }} Encontros Consonantais</strong> → {{ result.con_clusters.perfect }} perfeitos e {{ result.con_clusters.imperfect }} imperfeitos</li>{% endif %}
+                {% if result.reversed_syllables %}<li><strong>Sílabas ao Contrário</strong> → "{{ result.reversed_syllables }}"</li>{% endif %}
+
+                {% if hidden_fields %}
+                    <li class="locked-block">
+                        <a href="{% url 'upgrade-view' %}" class="locked-card">
+                            <div class="locked-blur">
+                                {% for _ in hidden_fields %}
+                                    <div class="locked-line"><strong>Lorem Ipsum</strong> → Dolor sit amet</div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="locked-cta">
+                                <span>Quer mais análises? Faça upgrade para o Plus!</span>
+                            </div>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            {% if not result.divided_word %}
+                <p class="text-danger pt-2">
+                    A palavra foi encontrada, porém não foi possível obter sua divisão silábica.
+                    Isso pode ter ocorrido devido a uma inconsistência no site de origem.
+                </p>
+            {% endif %}
+
+        {% else %}
+            <p class="mb-0">Aguardando uma palavra...</p>
+        {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}Divisor de Sílabas{% endblock %}</title>
+        <link rel="icon" href="{% static 'img/favicon.svg' %}" type="image/svg+xml">
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+        <meta name="description" content="Divisor de Sílabas online: análise completa de sílabas, tonicidade, dígrafos, fonemas e muito mais.">
+        <meta name="keywords" content="divisão de sílabas, sílabas, tônica, dígrafos, língua portuguesa, fonética">
+
+        {% block head_extra %}{% endblock %}
+    </head>
+
+    <body>
+        <header class="mb-4">
+            <nav class="navbar navbar-expand-lg navbar-dark app-navbar px-3 px-md-4" aria-label="Barra de navegação">
+                <a class="navbar-brand d-flex align-items-center gap-2 mb-0" href="{% url 'main-view' %}">
+                    <img src="{% static 'img/favicon.png' %}" alt="" class="brand-icon">
+                    <span>Divisor de Sílabas</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar" aria-expanded="false" aria-label="Alternar navegação">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="mainNavbar">
+                    <ul class="navbar-nav gap-lg-2 mt-3 mt-lg-0">
+                        {% if True %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'upgrade-view' %}">Upgrade</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'feedback-view' %}">Feedback</a>
+                            </li>
+
+                            <li class="nav-item d-flex align-items-center">
+                                <a href="{% url 'profile-view' %}" class="profile-icon-link" aria-label="Ir para perfil">
+                                    <i class="bi bi-person-circle" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="btn btn-outline-light btn-sm w-100 w-lg-auto" href="{% url 'login-view' %}">Entrar</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-warning btn-sm w-100 w-lg-auto fw-semibold" href="{% url 'register-view' %}">Cadastrar-se</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container my-4" id="main-content">
+            <div class="card p-4">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+
+        <footer class="container pb-4 site-footer text-center">
+            <small>
+                Copyright © {% now "Y" %}
+                <a href="https://github.com/JGabrielJ" target="_blank" rel="noopener noreferrer">João Gabriel</a>.
+                Todos os direitos reservados.
+            </small>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

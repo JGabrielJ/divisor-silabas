@@ -1,0 +1,56 @@
+{% extends "divisor_app/base.html" %}
+
+{% block title %}Planos | Divisor de Sílabas{% endblock %}
+
+{% block content %}
+	<section aria-labelledby="upgrade-title">
+		<header class="text-center mb-4">
+			<h1 id="upgrade-title" class="h4 mb-1">Escolha seu plano</h1>
+			<p class="small ds-text-soft mb-0">Desbloqueie mais recursos da análise silábica.</p>
+		</header>
+
+		<div class="row g-3">
+			<div class="col-12 col-md-4">
+				<article class="h-100 p-3 border rounded-3 bg-light-subtle text-dark">
+					<h2 class="h6">Free</h2>
+					<p class="small mb-3">Análise silábica básica.</p>
+					<ul class="small mb-3">
+						<li>Contagem de letras, fonemas e sílabas</li>
+						<li>Consulta limitada de palavras (20 por dia)</li>
+					</ul>
+					<button type="button" class="btn btn-outline-secondary w-100" disabled>
+						Plano atual
+					</button>
+				</article>
+			</div>
+
+			<div class="col-12 col-md-4">
+				<article class="h-100 p-3 border rounded-3 bg-warning-subtle text-dark">
+					<h2 class="h6">Plus</h2>
+					<p class="small mb-3">Análise silábica detalhada.</p>
+					<ul class="small mb-3">
+						<li>Contagem, fonética e encontros (vocálicos e consonantais)</li>
+						<li>Aumento do limite de consultas (100 por dia)</li>
+					</ul>
+					<button type="button" class="btn btn-outline-secondary w-100">
+						Fazer upgrade
+					</button>
+				</article>
+			</div>
+
+			<div class="col-12 col-md-4">
+				<article class="h-100 p-3 border rounded-3 bg-info-subtle text-dark">
+					<h2 class="h6">Pro</h2>
+					<p class="small mb-3">Análise silábica completa.</p>
+					<ul class="small mb-3">
+						<li>Acesso completo a todos os recursos</li>
+						<li>Quantidade ilimitada de consultas diárias</li>
+					</ul>
+					<button type="button" class="btn btn-primary w-100">
+						Assinar Pro
+					</button>
+				</article>
+			</div>
+		</div>
+	</section>
+{% endblock %}
