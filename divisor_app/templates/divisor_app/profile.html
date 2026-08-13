@@ -1,56 +1,91 @@
-{% extends "divisor_app/base.html" %}
+{% extends "divisor_app/base.html" %} {% block title %}Perfil | Divisor de
+Sílabas{% endblock %} {% block content %}
+<section class="section-gap" aria-labelledby="profile-title">
+  <h1 id="profile-title" class="page-title">Informações do Perfil</h1>
+  <p class="page-subtitle">Atualize seus dados da conta.</p>
+</section>
 
-{% block title %}Perfil | Divisor de Sílabas{% endblock %}
+<section class="row g-3" aria-label="Dados do perfil">
+  <div class="col-12 col-lg-4">
+    <div class="panel-light h-100">
+      <div class="text-center mb-3">
+        <img
+          src="https://via.placeholder.com/240"
+          alt="Foto de perfil"
+          class="img-fluid rounded-circle profile-image"
+          width="180"
+          height="180"
+        />
+      </div>
 
-{% block content %}
-	<section class="section-gap" aria-labelledby="profile-title">
-		<h1 id="profile-title" class="page-title">Informações do Perfil</h1>
-		<p class="page-subtitle">Atualize seus dados da conta.</p>
-	</section>
+      <div class="mb-0">
+        <label for="profile_image" class="form-label field-label"
+          >Foto de perfil</label
+        >
+        <input
+          id="profile_image"
+          name="profile_image"
+          type="file"
+          class="form-control"
+          form="profile-form"
+          accept="image/*"
+        />
+      </div>
+    </div>
+  </div>
 
-	<section class="row g-3" aria-label="Dados do perfil">
-		<div class="col-12 col-lg-4">
-			<div class="panel-light h-100">
-				<div class="text-center mb-3">
-					<img src="https://via.placeholder.com/240" alt="Foto de perfil"
-						class="img-fluid rounded-circle profile-image" width="180" height="180">
-				</div>
+  <div class="col-12 col-lg-8">
+    <div class="panel-light h-100" aria-label="Dados do perfil">
+      <form
+        id="profile-form"
+        method="post"
+        action="{% url 'profile-view' %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
 
-				<div class="mb-0">
-					<label for="profile_image" class="form-label field-label">Foto de perfil</label>
-					<input id="profile_image" name="profile_image" type="file"
-						class="form-control" form="profile-form" accept="image/*">
-				</div>
-			</div>
-		</div>
+        <div class="mb-3">
+          <label for="name" class="form-label field-label">Nome</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            class="form-control"
+            value="{{ user_profile.name }}"
+            placeholder="Digite seu nome"
+          />
+        </div>
 
-		<div class="col-12 col-lg-8">
-			<div class="panel-light h-100" aria-label="Dados do perfil">
-				<form id="profile-form" method="post" action="{% url 'profile-view' %}" enctype="multipart/form-data">
-					{% csrf_token %}
-					
-					<div class="mb-3">
-						<label for="name" class="form-label field-label">Nome</label>
-						<input id="name" name="name" type="text" class="form-control"
-							value="{{ user_profile.name }}" placeholder="Digite seu nome">
-					</div>
+        <div class="mb-3">
+          <label for="email" class="form-label field-label">E-mail</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            class="form-control"
+            value="{{ user_profile.email }}"
+            placeholder="seu_email@example.com"
+          />
+        </div>
 
-					<div class="mb-3">
-						<label for="email" class="form-label field-label">E-mail</label>
-						<input id="email" name="email" type="email" class="form-control"
-							value="{{ user_profile.email }}" placeholder="seu_email@example.com">
-					</div>
+        <div class="mb-3">
+          <label for="pwd" class="form-label field-label">Senha</label>
+          <input
+            id="pwd"
+            name="pwd"
+            type="password"
+            class="form-control"
+            placeholder="••••••••"
+          />
+        </div>
 
-					<div class="mb-3">
-						<label for="pwd" class="form-label field-label">Senha</label>
-						<input id="pwd" name="pwd" type="password" class="form-control" placeholder="••••••••">
-					</div>
-
-					<div class="mt-4 d-grid d-sm-flex justify-content-sm-end">
-						<button type="submit" class="btn btn-primary">Salvar alterações</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</section>
+        <div class="mt-4 d-grid d-sm-flex justify-content-sm-end">
+          <button type="submit" class="btn btn-primary">
+            Salvar alterações
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 {% endblock %}

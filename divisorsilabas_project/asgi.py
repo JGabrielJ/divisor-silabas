@@ -1,3 +1,4 @@
+#! divisorsilabas_project/asgi.py
 """
 ASGI config for divisorsilabas_project project.
 
@@ -11,6 +12,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'divisorsilabas_project.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "divisorsilabas_project.settings")
 
 application = get_asgi_application()

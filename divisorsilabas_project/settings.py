@@ -1,3 +1,4 @@
+#! divisorsilabas_project/settings.py
 """
 Django settings for divisorsilabas_project project.
 
@@ -9,15 +10,18 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+
 import os
-import dj_database_url
 from pathlib import Path
+
+import dj_database_url
 from django.contrib.messages import constants as messages
 
-def get_var_from_env(var_name: str, default='') -> str:
+
+def get_var_from_env(var_name: str, default="") -> str:
     envvar: str = os.environ.get(var_name, default)
     if not DEBUG and not envvar:
-        raise RuntimeError(f'{var_name} is not set')
+        raise RuntimeError(f"{var_name} is not set")
     return envvar
 
 
@@ -29,7 +33,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+DEBUG = "RENDER" not in os.environ
 
 ALLOWED_HOSTS = []
 
@@ -37,58 +41,58 @@ if DEBUG:
     from dotenv import load_dotenv
 
     load_dotenv()
-    print('DEBUG MODE: Using .env local settings...')
+    print("DEBUG MODE: Using .env local settings...")
 
-    ALLOWED_HOSTS += ['localhost', '127.0.0.1']
+    ALLOWED_HOSTS += ["localhost", "127.0.0.1"]
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_var_from_env('SECRET_KEY')
+SECRET_KEY = get_var_from_env("SECRET_KEY")
 
-RENDER_EXTERNAL_HOSTNAME = get_var_from_env('RENDER_EXTERNAL_HOSTNAME')
+RENDER_EXTERNAL_HOSTNAME = get_var_from_env("RENDER_EXTERNAL_HOSTNAME")
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'divisor_app',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "divisor_app",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'divisorsilabas_project.urls'
+ROOT_URLCONF = "divisorsilabas_project.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'divisorsilabas_project.wsgi.application'
+WSGI_APPLICATION = "divisorsilabas_project.wsgi.application"
 
 
 # Database
@@ -96,16 +100,16 @@ WSGI_APPLICATION = 'divisorsilabas_project.wsgi.application'
 
 if DEBUG:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 else:
     DATABASES = {
-        'default': dj_database_url.config(
-            default='postgresql://postgres:postgres@localhost:5432/divisorsilabas',
-            conn_max_age=600
+        "default": dj_database_url.config(
+            default="postgresql://postgres:postgres@localhost:5432/divisorsilabas",
+            conn_max_age=600,
         )
     }
 
@@ -116,7 +120,7 @@ else:
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": "divisorsilabas-cache"
+        "LOCATION": "divisorsilabas-cache",
     }
 }
 
@@ -126,16 +130,16 @@ CACHES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -143,9 +147,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = "pt-br"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -155,53 +159,53 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
 
 
 # WhiteNoise
 # https://whitenoise.readthedocs.io/
 
 if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 # New folder 'static'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "static",
 ]
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Message tags
 
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger',
+    messages.ERROR: "danger",
 }
 
 
 # Email configuration
 
-GOOGLE_FORMS_FORM_RESPONSE_URL = get_var_from_env('FORM_URL')
-GOOGLE_FORMS_FEEDBACK_ENTRY = get_var_from_env('FORM_FEEDBACK_ENTRY')
+GOOGLE_FORMS_FORM_RESPONSE_URL = get_var_from_env("FORM_URL")
+GOOGLE_FORMS_FEEDBACK_ENTRY = get_var_from_env("FORM_FEEDBACK_ENTRY")
 
 
 # API configuration
 
-API_BASE_URL = get_var_from_env('API_BASE_URL')
-API_SITE_TOKEN = get_var_from_env('API_SITE_TOKEN')
+API_BASE_URL = get_var_from_env("API_BASE_URL")
+API_SITE_TOKEN = get_var_from_env("API_SITE_TOKEN")
 
 PREMIUM_FIELDS = {
-    'letters',
-    'phonemes',
-    'syllables',
-    'stress',
-    'vow_clusters',
-    'con_clusters',
+    "letters",
+    "phonemes",
+    "syllables",
+    "stress",
+    "vow_clusters",
+    "con_clusters",
 }

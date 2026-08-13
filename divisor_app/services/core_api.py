@@ -1,25 +1,26 @@
-# divisor_app/services/core_api.py
+#! divisor_app/services/core_api.py
 
-import hmac, hashlib, requests
+import hashlib
+import hmac
+
+import requests
 from django.conf import settings
 
-from typing import Optional, Dict
 from .exceptions import CoreAPIError
 
 
 class CoreAPIClient:
-    def __init__(self,
-        api_key: Optional[str] = None,
-        extra_headers: Optional[Dict[str, str]] = None
+    def __init__(
+        self, api_key: str | None = None, extra_headers: dict[str, str] | None = None
     ) -> None:
-        self.headers: Dict[str, str] = {}
+        self.headers: dict[str, str] = {}
 
         if api_key:
-            self.headers['X-API-Key'] = api_key
+            self.headers["X-API-Key"] = api_key
 
         if settings.API_SITE_TOKEN:
-            self.headers['X-Site-Token'] = settings.API_SITE_TOKEN
-            self.headers['X-Site-Signature'] = _build_site_signature(
+            self.headers["X-Site-Token"] = settings.API_SITE_TOKEN
+            self.headers["X-Site-Signature"] = _build_site_signature(
                 settings.API_SITE_TOKEN
             )
 
@@ -28,8 +29,8 @@ class CoreAPIClient:
 
     def analyze_word(self, word: str) -> dict:
         response = requests.post(
-            f'{settings.API_BASE_URL}/v1/analyze',
-            json={'word': word},
+            f"{settings.API_BASE_URL}/v1/analyze",
+            json={"word": word},
             headers=self.headers,
             timeout=5,
         )
@@ -41,8 +42,8 @@ class CoreAPIClient:
 
         try:
             payload = response.json()
-            if isinstance(payload, dict) and 'detail' in payload:
-                message = str(payload['detail'])
+            if isinstance(payload, dict) and "detail" in payload:
+                message = str(payload["detail"])
 
         except ValueError:
             pass
@@ -53,6 +54,6 @@ class CoreAPIClient:
 def _build_site_signature(token: str) -> str:
     return hmac.new(
         token.encode(),
-        b'divisorsilabas-site',
+        b"divisorsilabas-site",
         hashlib.sha256,
     ).hexdigest()
