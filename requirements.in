@@ -1,0 +1,12 @@
+# Website dependencies
+asgiref
+better-profanity
+django
+dj-database-url
+gunicorn
+pyphen
+python-dotenv
+requests
+uvicorn
+whitenoise
+# LOCAL: pip-tools
