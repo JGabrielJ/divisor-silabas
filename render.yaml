@@ -9,8 +9,8 @@ services:
     plan: free
     name: divisorsilabas
     runtime: python
-    buildCommand: './build.sh'
-    startCommand: 'python -m gunicorn divisorsilabas_project.asgi:application -k uvicorn.workers.UvicornWorker'
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn divisorsilabas_project.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -20,3 +20,5 @@ services:
         generateValue: true
       - key: WEB_CONCURRENCY
         value: 4
+      - key: PAYPAL_DONATION_ID
+        sync: false

@@ -45,7 +45,7 @@ def main_view(request):
         "result": result,
         "word_form": word_form,
         "error_messages": error_messages,
-        "paypal_donation_url": settings.PAYPAL_DONATION_URL,
+        "paypal_donation_id": settings.PAYPAL_DONATION_ID,
     }
 
     if request.method == "POST" and "submit_word" in request.POST:
