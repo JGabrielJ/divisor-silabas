@@ -8,7 +8,6 @@ class DictionaryUnavailableError(RuntimeError):
     """Indicates that the dictionary service could not be consulted."""
 
 
-# python manage.py runserver
 class WordAnalyzer:
     def __init__(self, word: str) -> None:
         """Receives a single word and analyzes it in detail.

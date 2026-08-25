@@ -1,13 +1,21 @@
 import logging
+from pathlib import Path
 
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 
 from .core.analyzer import WordAnalyzer
 from .forms import WordForm
 
 logger = logging.getLogger(__name__)
+
+
+def ads_txt(request):
+    """Serves the authorized sellers declaration at the domain root."""
+    ads_file = Path(settings.BASE_DIR) / "ads.txt"
+    return HttpResponse(ads_file.read_text(encoding="utf-8"), content_type="text/plain")
 
 
 def get_word_analysis_data(word: str) -> dict:
