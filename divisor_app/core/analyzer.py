@@ -1,4 +1,11 @@
+from urllib.parse import quote
+
 import pyphen
+import requests
+
+
+class DictionaryUnavailableError(RuntimeError):
+    """Indicates that the dictionary service could not be consulted."""
 
 
 # python manage.py runserver
@@ -9,7 +16,6 @@ class WordAnalyzer:
         Args:
             word (str): Contains the word provided by the user.
         """
-
         # Vogais, consoantes e dígrafos
         self.ALPHABET: dict[str, list[str]] = {
             "vow": [
@@ -71,6 +77,7 @@ class WordAnalyzer:
 
         self.word: str = word.lower().strip()
         self._hyphenator = pyphen.Pyphen(lang="pt_BR")
+        self._word_exists: bool | None = None
 
         # Inicialização dos dados da palavra
         self.syl_list: list[str] = self._hyphenator.inserted(self.word).split("-")
@@ -83,6 +90,34 @@ class WordAnalyzer:
             word if found, otherwise an empty string.
         """
         return "-".join(self.syl_list)
+
+    def word_exists(self) -> bool:
+        """Checks whether the word has an entry in Dicionário Aberto."""
+        if self._word_exists is not None:
+            return self._word_exists
+
+        url = f"https://api.dicionario-aberto.net/word/{quote(self.word, safe='')}"
+        try:
+            response = requests.get(
+                url,
+                headers={"User-Agent": "DivisorDeSilabas/2.0"},
+                timeout=5,
+            )
+        except requests.RequestException as exc:
+            raise DictionaryUnavailableError from exc
+
+        if response.status_code == 404:
+            self._word_exists = False
+            return False
+
+        try:
+            response.raise_for_status()
+            entries = response.json()
+        except (requests.RequestException, ValueError) as exc:
+            raise DictionaryUnavailableError from exc
+
+        self._word_exists = isinstance(entries, list) and bool(entries)
+        return self._word_exists
 
     def count_letters(self) -> dict[str, int]:
         """Counts the number of letters of the user-supplied word.
