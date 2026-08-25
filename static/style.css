@@ -1,0 +1,134 @@
+:root {
+  --box-bg: #f2d77e;
+  --page-bg: #0a2239;
+  --card-bg: #1a3a5a;
+  --donate-bg: #12304d;
+
+  --black: #000000;
+  --white: #ffffff;
+  --border: #8bd450;
+  --danger: #ff3333;
+}
+
+* {
+  font-family: "Lato", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+
+body {
+  color: var(--white);
+  background-color: var(--page-bg);
+}
+
+hr {
+  color: var(--border);
+}
+
+.container {
+  max-width: 850px;
+}
+
+.card {
+  color: var(--white);
+  border: 1px solid var(--border);
+  background-color: var(--card-bg);
+}
+
+label {
+  color: var(--white);
+}
+
+.form-control {
+  color: var(--black);
+  background-color: var(--white);
+}
+
+.result-box {
+  color: var(--black);
+  display: flex;
+  padding: 20px;
+  min-height: 150px;
+  text-align: center;
+  border-radius: 5px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border: 3px solid var(--border);
+  background-color: var(--box-bg);
+}
+
+.text-danger {
+  color: var(--danger) !important;
+}
+
+.donation-options {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.donation-box {
+  display: flex;
+  flex: 1 1 0;
+  gap: 1rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background-color: var(--donate-bg);
+}
+
+.donation-text {
+  margin: 0;
+}
+
+.donation-button {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.donation-title {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.pix-box {
+  min-width: 0;
+}
+
+.pix-qr-code {
+  width: 180px;
+  height: 180px;
+  flex: 0 0 180px;
+  border-radius: 10px;
+  object-fit: contain;
+  background-color: var(--white);
+}
+
+@media (max-width: 576px) {
+  .donation-options {
+    flex-direction: column;
+  }
+
+  .donation-box {
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .donation-button {
+    width: 100%;
+  }
+
+  .pix-qr-code {
+    align-self: center;
+  }
+}

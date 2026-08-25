@@ -71,10 +71,6 @@ cover/
 # Translations
 *.mo
 
-# Django stuff:
-requirements.in
-requirements-dev.in
-
 # Flask stuff:
 instance/
 .webassets-cache

@@ -1,0 +1,12 @@
+# Website dependencies
+better-profanity
+django
+dj-database-url
+gunicorn
+psycopg2-binary
+pyphen
+python-dotenv
+requests
+uvicorn
+whitenoise[brotli]
+# LOCAL: djlint, pip-tools
