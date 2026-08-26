@@ -84,16 +84,17 @@
                 <hr class="mt-4" />
                 <div class="donation-section">
                     <p class="donation-text">
-                        Gostou do projeto? Apoie o seu desenvolvimento e ajude
-                        a manter esta ferramenta gratuita disponível.
+                        Gostou do projeto? Sua contribuição ajuda a manter a ferramenta
+                        disponível e apoia o desenvolvimento da próxima versão, com novas
+                        funcionalidades e resultados ainda melhores.
                     </p>
                     <div class="donation-options">
                         {% if paypal_donation_id %}
                             <div id="donate-button-container" class="donation-box">
                                 <h2 class="donation-title">PayPal</h2>
                                 <p class="donation-text">
-                                    Contribua usando sua conta PayPal ou outro método de pagamento
-                                    disponível no checkout.
+                                    Faça uma contribuição pelo PayPal usando a
+                                    opção de pagamento disponível para você.
                                 </p>
                                 <div id="donate-button" class="donation-button"></div>
                                 <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js"
@@ -114,8 +115,8 @@
                         <div class="donation-box pix-box">
                             <h2 class="donation-title">PIX</h2>
                             <p class="donation-text">
-                                Abra o aplicativo do seu banco e escaneie o QR Code para escolher
-                                o valor da contribuição.
+                                Escaneie o QR Code no aplicativo do seu banco
+                                e escolha o valor que deseja contribuir.
                             </p>
                             <img class="pix-qr-code"
                                  src="{% static 'pix-qr-code.png' %}"
@@ -127,7 +128,8 @@
                     Copyright © 2025-{% now "Y" %}
                     <a href="https://github.com/JGabrielJ"
                        target="_blank"
-                       rel="noopener noreferrer">João Gabriel</a>. Todos os direitos reservados.
+                       rel="noopener noreferrer">João Gabriel</a>.
+                    Todos os direitos reservados.
                 </footer>
             </div>
         </div>

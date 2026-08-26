@@ -11,9 +11,7 @@
 
 ## Sobre o Projeto
 
-Uma aplicação web desenvolvida com Django que recebe uma palavra qualquer da Língua Portuguesa e retorna sua divisão silábica usando padrões locais do [**Pyphen**](https://pyphen.org/), juntamente com algumas informações adicionais sobre a palavra. Lembre-se de que esta é uma versão gratuita de demonstração, portanto nem todas as palavras estarão disponíveis ou serão separadas corretamente. Uma nova versão do website está atualmente em desenvolvimento para fornecer melhores resultados aos usuários.
-
-> OBS: o botão de doação via PayPal não está disponível em modo de execução local.
+Uma aplicação web desenvolvida com Django que recebe uma palavra da língua portuguesa, verifica se há uma entrada correspondente na [**API do Dicionário Aberto**](https://api.dicionario-aberto.net/) e retorna uma divisão silábica baseada nos padrões locais do [**Pyphen**](https://pyphen.org/), além de informações adicionais sobre a palavra. Como se trata de uma versão gratuita de demonstração, algumas palavras podem não estar disponíveis ou podem ser separadas de forma incorreta.
 
 ## Utilizando o Website
 
@@ -104,6 +102,6 @@ Existem duas maneiras de acessar o Divisor de Sílabas, descritas logo abaixo:
    python manage.py runserver
    ```
 
-- Agora, é só acessar o endereço `127.0.0.1:8000` no seu navegador e o Divisor de Sílabas estará disponível para uso.
+- Agora, é só acessar o endereço `127.0.0.1:8000` no seu navegador e o Divisor de Sílabas estará disponível para uso. _Obs.: o botão de doação via PayPal **não está disponível** em modo de execução local._
 
-> Nota do Dev: a versão original do projeto, desenvolvida com PySimpleGUI, pode ser encontrada em [**ProjetosAcademicos**](<https://github.com/JGabrielJ/ProjetosAcademicos/tree/main/DivisorSilabas%20(old)>).
+> Nota do Dev: a versão original do projeto (1.0), desenvolvida com PySimpleGUI, pode ser encontrada em [**DivisorSilabas (old)**](<https://github.com/JGabrielJ/projetos-academicos/tree/main/DivisorSilabas%20(old)>).
